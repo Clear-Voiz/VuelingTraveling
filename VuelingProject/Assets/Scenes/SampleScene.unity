@@ -207,45 +207,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 237350945}
-        m_TargetAssemblyTypeName: GAME.ObjectSpawner, Assembly-CSharp
-        m_MethodName: Respawn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1505625399}
-        m_TargetAssemblyTypeName: UI.ButtonFunctions, Assembly-CSharp
-        m_MethodName: HideStartGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1724670877}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ChangeGameState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 380186419}
         m_TargetAssemblyTypeName: Networking, Assembly-CSharp
-        m_MethodName: CallServer
+        m_MethodName: StartNetworking
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -458,7 +422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91a4dc93116de84ea13c94e44e13e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Username: playerA
+  objectSpawner: {fileID: 237350945}
+  buttonFunctions: {fileID: 1505625399}
 --- !u!4 &380186420
 Transform:
   m_ObjectHideFlags: 0
@@ -2963,11 +2928,20 @@ MonoBehaviour:
   playerStats: {fileID: 0}
   isPlaying: 0
   rb: {fileID: 0}
+  myUsername: 
+  myGameId: 0
+  myColor: 
   userId: 
   NameDisplayer: {fileID: 711347363}
   currentPlayerController: {fileID: 0}
   startButton: {fileID: 0}
   infoLoaded: 0
+  Players: 
+  AvailableColors:
+  - FF5732
+  - FFE533
+  - B5FF33
+  - FD33FF
 --- !u!114 &1724670878
 MonoBehaviour:
   m_ObjectHideFlags: 0
