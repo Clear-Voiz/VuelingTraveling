@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class PlaneCollision : MonoBehaviour
 {
+    public static event Action OnGameOver;
     public string objectTag;
     public GameObject VFX;
     private void OnCollisionEnter(Collision collision)
@@ -9,6 +11,7 @@ public class PlaneCollision : MonoBehaviour
         if (collision.gameObject.CompareTag(objectTag))
         {
             Instantiate(VFX, transform.position, transform.rotation);
+            OnGameOver?.Invoke();
             Destroy(gameObject);
         }
     }

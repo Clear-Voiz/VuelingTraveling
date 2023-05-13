@@ -5,13 +5,33 @@ namespace UI
 {
     public class ButtonFunctions : MonoBehaviour
     {
-        public Rigidbody player;
-        public static event Action OnElevate;
         public Canvas gameOver;
+        public Canvas startGame;
+
+
+        private void OnEnable()
+        {
+            PlaneCollision.OnGameOver += ShowGameOver;
+        }
 
         public void HideGameOver()
         {
             gameOver.enabled = false;
+        }
+        
+        public void HideStartGame()
+        {
+            startGame.enabled = false;
+        }
+
+        public void ShowGameOver()
+        {
+            gameOver.gameObject.SetActive(true);
+        }
+
+        private void OnDisable()
+        {
+            PlaneCollision.OnGameOver -= ShowGameOver;
         }
     }
 }
