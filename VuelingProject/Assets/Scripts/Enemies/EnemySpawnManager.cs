@@ -8,20 +8,36 @@ namespace Enemies
     {
         [HideInInspector] public float spawnRate = 2f;
         public ObjectSpawner[] spawnPoints;
-        private Timers tim;
+
+        private float timeToSpawn;
+        private int spawnPoint;
 
         private void Start()
         {
-            tim = new Timers(1);
+            spawnPoint = Random.Range(0, spawnPoints.Length - 1);
+            timeToSpawn = spawnRate;
         }
 
         private void Update()
         {
             if (GameManager.Instance.playerStats == null) return;
             if (GameManager.Instance.isPlaying == false) return;
-            float spawnIncrement = GameManager.Instance.playerStats.speed / 10f;
-            Debug.Log(spawnRate-spawnIncrement);
-            tim.alarm[0] = tim.Timer(spawnRate - (spawnIncrement), tim.alarm[0], spawnPoints[Random.Range(0,spawnPoints.Length-1)].Respawn);
+
+            timeToSpawn -= Time.deltaTime;
+            if (timeToSpawn <= 0)
+            {
+                NewSpawn();
+            }
+            
+            //tim.alarm[0] = tim.Timer(spawnRate - (spawnIncrement), tim.alarm[0], spawnPoints[Random.Range(0,spawnPoints.Length-1)].Respawn);
+        }
+
+        void NewSpawn()
+        {
+            spawnPoints[spawnPoint].Respawn();
+            float spawnIncrement = GameManager.Instance.playerStats.speed / GameManager.Instance.playerStats.maxSpeed;
+            timeToSpawn = spawnRate - spawnIncrement;
+            spawnPoint = Random.Range(0, spawnPoints.Length - 1);
         }
     }
 }

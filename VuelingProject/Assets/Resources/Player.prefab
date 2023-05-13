@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6964276805690384978}
   - component: {fileID: 2259424891570558405}
   - component: {fileID: 6618641009143734065}
+  - component: {fileID: 7094778399278095015}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -64,9 +65,9 @@ MonoBehaviour:
   speed: 1
   baseSpeed: 5
   maxSpeed: 12
-  lateralSpeed: 4
-  maxLateralSpeed: 6
-  lateralSpeedIncreaseRate: 6
+  lateralSpeed: 15
+  maxLateralSpeed: 15
+  lateralSpeedIncreaseRate: 15
 --- !u!114 &6964276805690384978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +80,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9da339bb0e4c3499ef529d256e4a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectTag: Enemy
   VFX: {fileID: 100000, guid: ec8cde2885710284a9b8c495be620bd9, type: 3}
 --- !u!65 &2259424891570558405
 BoxCollider:
@@ -110,6 +110,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &7094778399278095015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140077614349121298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a7416a2a5ec344885abbfc90ccc2dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputMovement: {x: 0, y: 0, z: 0}
+  joystick: {fileID: 0}
+  stats: {fileID: 0}
 --- !u!1001 &1140077614561897769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -173,6 +188,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 08f7cb4226988ec4d8bec6ecb0556b64, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5b5de65e89b141747ac9ed89dc0e58a3, type: 2}
     - target: {fileID: 919132149155446097, guid: 08f7cb4226988ec4d8bec6ecb0556b64, type: 3}
       propertyPath: m_Name
       value: lowpoly_plane

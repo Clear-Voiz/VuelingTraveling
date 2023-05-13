@@ -37,9 +37,9 @@ namespace UI
         private IEnumerator SendWebRequest()
         {
              WWWForm form = new WWWForm();
-             form.AddField("extracoins","5");
-             form.AddField("punctuation", ""+(int)km);
-             UnityWebRequest www = UnityWebRequest.Post("https://hack2023-vueling.onrender.com/api/v1/game/645ece91092a2fab071cf86d", form);
+             form.AddField("extracoins",5);
+             //form.AddField("punctuation", ""+(int)km);
+             UnityWebRequest www = UnityWebRequest.Post("https://hack2023-vueling.onrender.com/api/v1/game/645f555df4e714f53fbfeae9", form);
              yield return www.SendWebRequest();
 
              if (www.result != UnityWebRequest.Result.Success)

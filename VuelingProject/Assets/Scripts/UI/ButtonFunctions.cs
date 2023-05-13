@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using UnityEngine;
 
 namespace UI
@@ -6,11 +8,17 @@ namespace UI
     {
         public Canvas gameOver;
         public Canvas startGame;
+        public TextMeshProUGUI username;
 
 
         private void OnEnable()
         {
             PlaneCollision.OnGameOver += ShowGameOver;
+        }
+
+        private void Start()
+        {
+            username.text = GameManager.Instance.currentPlayer.Username;
         }
 
         public void HideGameOver()

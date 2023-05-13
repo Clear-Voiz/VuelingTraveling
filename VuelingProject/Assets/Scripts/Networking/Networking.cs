@@ -22,6 +22,8 @@ public class Networking : MonoBehaviour
 		switch (msg.type)
 		{
 			case "hello":
+				Debug.Log(msg);
+				GameManager.Instance.SetLoaded(true); //bajarlo al final del case Hello
 				int gameId = int.Parse(msg.payload["id"]);
 				string list = msg.payload["players"];
 
@@ -35,8 +37,13 @@ public class Networking : MonoBehaviour
 
 				Debug.Log("My Id: " + gameId);
 				Debug.Log("Players: " + list);
+				
+				
 				break;
 		}
+		// GameManager.Instance.currentPlayerController.SpeedDebuff();
+		// GameManager.Instance.currentPlayerController.VisibilityDebuff();
+		// GameManager.Instance.currentPlayerController.InvertControllsDebuff();
 	}
 
 	private async void OnOpen()
@@ -62,7 +69,7 @@ public class Networking : MonoBehaviour
 
 		// Cuando nos queramos conectar varios,
 		// ws://178.33.35.235:3000/gateway?username=XXX
-		websocket = new WebSocket("ws://127.0.0.1:3000/gateway?username=" + Username);
+		websocket = new WebSocket("ws://178.33.35.235:3000/gateway?username=" + Username);
 
 		websocket.OnOpen += OnOpen;
 		websocket.OnMessage += OnMessage;

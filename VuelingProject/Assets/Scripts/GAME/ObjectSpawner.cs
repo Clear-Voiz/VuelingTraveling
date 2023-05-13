@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace GAME
@@ -9,6 +10,18 @@ namespace GAME
         public void Respawn()
         {
             Instantiate(player, transform.position, transform.rotation);
+        }
+
+        public void SpawnOnSeconds(float time)
+        {
+            
+            StartCoroutine(SpawnOnSecondsCor(time));
+        }
+
+        IEnumerator SpawnOnSecondsCor(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            Respawn();
         }
     }
 }
