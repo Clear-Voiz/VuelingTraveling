@@ -6,11 +6,12 @@ namespace Enemies
     public class EnemyPlaneMovement : MonoBehaviour
     {
         private Rigidbody _rb;
-        private float speed = 2f;
+        private float speed = 6f;
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
+            PlaneCollision.OnGameOver += DestroyOnDemand;
         }
 
         private void Start()
@@ -21,6 +22,18 @@ namespace Enemies
         private void FixedUpdate()
         {
             _rb.MovePosition(transform.position +(transform.forward * speed * Time.deltaTime));
+        }
+
+      
+
+        private void DestroyOnDemand()
+        {
+            Destroy(gameObject);
+        }
+
+        private void OnDisable()
+        {
+            PlaneCollision.OnGameOver -= DestroyOnDemand;
         }
     }
 }

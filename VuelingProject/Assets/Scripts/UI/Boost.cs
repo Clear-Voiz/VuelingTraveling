@@ -45,7 +45,6 @@ namespace UI
                 {
                     GameManager.Instance.playerStats.speed -= speedAmount;
                 }
-                Debug.Log(GameManager.Instance.playerStats.speed);
                 yield return null;
             }
             

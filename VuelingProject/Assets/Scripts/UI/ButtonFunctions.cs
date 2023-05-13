@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace UI
@@ -16,7 +15,7 @@ namespace UI
 
         public void HideGameOver()
         {
-            gameOver.enabled = false;
+            gameOver.gameObject.SetActive(false);
         }
         
         public void HideStartGame()
