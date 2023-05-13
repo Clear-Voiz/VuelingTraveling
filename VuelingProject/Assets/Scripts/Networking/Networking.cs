@@ -7,7 +7,10 @@ using Newtonsoft.Json;
 
 public class Networking : MonoBehaviour
 {
-    WebSocket websocket;
+	public GAME.ObjectSpawner objectSpawner;
+	public UI.ButtonFunctions buttonFunctions;
+
+	WebSocket websocket;
 
 	private void OnMessage(byte[] data)
 	{
@@ -31,6 +34,10 @@ public class Networking : MonoBehaviour
 				}
 
 				GameManager.Instance.SetLoaded(true); //bajarlo al final del case Hello
+				
+				objectSpawner.Respawn();
+				buttonFunctions.HideStartGame();
+				GameManager.Instance.ChangeGameState();
 
 				break;
 		}
