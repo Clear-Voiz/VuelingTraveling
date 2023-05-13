@@ -37,8 +37,8 @@ public class PlaneController : MonoBehaviour
     void InitPlane()
     {
         Color tempColor;
-        Debug.Log(GameManager.Instance.currentPlayer.Color);
-        if (ColorUtility.TryParseHtmlString("#" + GameManager.Instance.currentPlayer.Color, out tempColor))
+        Debug.Log(GameManager.Instance.myColor);
+        if (ColorUtility.TryParseHtmlString("#" + GameManager.Instance.myColor, out tempColor))
         {
             meshRenderer.materials[0].SetColor("_Color", tempColor);
         }

@@ -18,7 +18,7 @@ namespace UI
 
         private void Start()
         {
-            username.text = GameManager.Instance.currentPlayer.Username;
+            username.text = GameManager.Instance.myUsername;
         }
 
         public void HideGameOver()

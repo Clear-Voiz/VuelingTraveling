@@ -5,13 +5,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Newtonsoft.Json;
+
 public class GameManager : MonoBehaviour
 {
     public PlayerStats playerStats;
     public bool isPlaying;
     [HideInInspector] public Rigidbody rb;
 
-    public Player currentPlayer;
+    public string myUsername;
+    public int myGameId;
+    public string myColor;
     public string userId;
     public TextMeshProUGUI NameDisplayer;
 
@@ -21,7 +25,15 @@ public class GameManager : MonoBehaviour
 
     public bool infoLoaded;
 
-    public Dictionary<string, Player> Players = new Dictionary<string, Player>();
+    public List<int> Players = new List<int>();
+
+    public List<string> AvailableColors = new List<string>()
+    {
+        "FF5732",
+        "FFE533",
+        "B5FF33",
+        "FD33FF"
+    };
 
     public static GameManager Instance { get; private set; }
     public static event Action<PlayerStats> OnPlayerStats;
@@ -62,19 +74,15 @@ public class GameManager : MonoBehaviour
         PlayerStats.OnPlayerSpawn -= GetPlayerStats;
     }
 
-    public void SetUsername(string username, string id, string color)
-    {
-        currentPlayer.Username = username;
-        currentPlayer.Id = id;
-        currentPlayer.Color = color;
-    }
-
     public void ReceiveUsernameFrontend(string parameters)
     {
-        UserIdentificator userIdentificator = JsonUtility.FromJson<UserIdentificator>(parameters);
-        currentPlayer = new Player(userIdentificator.userId, userIdentificator.userName, userIdentificator.color);
+        UserIdentificator userIdentificator = JsonConvert.DeserializeObject<UserIdentificator>(parameters);
+
+        userId = userIdentificator.userId;
+        myUsername = userIdentificator.userName;
+        myColor = userIdentificator.color;
         
-        NameDisplayer.text = currentPlayer.Color;
+        NameDisplayer.text = myColor;
         Debug.Log("Received! " + parameters);
     }
 }
@@ -84,24 +92,4 @@ public struct UserIdentificator
     public string userName;
     public string userId;
     public string color;
-}
-
-[System.Serializable]
-public struct Player
-{
-    public string Id { get; set; }
-
-    public string Username { get; set; }
-    
-    public string Color { get; set; }
-
-    public Player(string id, string username, string color)
-    {
-        this.Id = id;
-        this.Username = username;
-        this.Color = color;
-        Debug.Log(color);
-    }
-    
-    
 }

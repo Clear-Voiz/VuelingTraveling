@@ -3,42 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using NativeWebSocket;
+using Newtonsoft.Json;
 
 public class Networking : MonoBehaviour
 {
-    public string Username = "playerA";
-    WebSocket? websocket;
-
-    // Start is called before the first frame update
-   
+    WebSocket websocket;
 
 	private void OnMessage(byte[] data)
 	{
 		string message = System.Text.Encoding.UTF8.GetString(data);
 		Debug.Log("Message received: " + message);
 
-		JsonMessage msg = JsonUtility.FromJson<JsonMessage>(message);
+		JsonMessage msg = JsonConvert.DeserializeObject<JsonMessage>(message);
 
 		switch (msg.type)
 		{
 			case "hello":
-				Debug.Log(msg);
-				GameManager.Instance.SetLoaded(true); //bajarlo al final del case Hello
 				int gameId = int.Parse(msg.payload["id"]);
-				string list = msg.payload["players"];
+				string listJson = msg.payload["players"];
 
-				List<Player> players = JsonUtility.FromJson<List<Player>>(list);
+				List<int> players = JsonConvert.DeserializeObject<List<int>>(listJson);
 
 				foreach (var p in players)
 				{
-					GameManager.Instance.Players.Add(p.Id, p);
-					Debug.Log("Added player Id " + p.Id + " in my game");
+					GameManager.Instance.Players.Add(p);
+					Debug.Log("Added player Id " + p + " in my game");
 				}
 
-				Debug.Log("My Id: " + gameId);
-				Debug.Log("Players: " + list);
-				
-				
+				GameManager.Instance.SetLoaded(true); //bajarlo al final del case Hello
+
 				break;
 		}
 		// GameManager.Instance.currentPlayerController.SpeedDebuff();
@@ -51,8 +44,8 @@ public class Networking : MonoBehaviour
         Debug.Log("Server connected!");
 
 		JsonMessage hello = new JsonMessage("hello", 0, new Dictionary<string, string>());
-		Debug.Log(JsonUtility.ToJson(hello));
-		await websocket.SendText(JsonUtility.ToJson(hello));
+		string json = JsonConvert.SerializeObject(hello);
+		await websocket.SendText(json);
 	}
 
 	// Update is called once per frame
@@ -63,19 +56,18 @@ public class Networking : MonoBehaviour
 #endif
 	}
 
-	public async void Start()
-	{
+	public async void StartNetworking()
+    {
 		Debug.Log("Connecting to game server...");
 
 		// Cuando nos queramos conectar varios,
 		// ws://178.33.35.235:3000/gateway?username=XXX
-		websocket = new WebSocket("ws://178.33.35.235:3000/gateway?username=" + Username);
+		websocket = new WebSocket("ws://178.33.35.235:3000/gateway?username=" + GameManager.Instance.myUsername);
 
 		websocket.OnOpen += OnOpen;
 		websocket.OnMessage += OnMessage;
 
 		await websocket.Connect();
-		//websocket.Send()
 	}
 
 	[System.Serializable]
