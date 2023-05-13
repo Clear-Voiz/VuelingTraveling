@@ -10,19 +10,7 @@ public class Networking : MonoBehaviour
     WebSocket? websocket;
 
     // Start is called before the first frame update
-    async void Start()
-    {
-		Debug.Log("Connecting to game server...");
-
-		// Cuando nos queramos conectar varios,
-		// ws://178.33.35.235:3000/gateway?username=XXX
-        websocket = new WebSocket("ws://127.0.0.1:3000/gateway?username=" + Username);
-
-		websocket.OnOpen += OnOpen;
-		websocket.OnMessage += OnMessage;
-
-		await websocket.Connect();
-    }
+   
 
 	private void OnMessage(byte[] data)
 	{
@@ -41,5 +29,21 @@ public class Networking : MonoBehaviour
 #if !UNITY_WEBGL || UNITY_EDITOR
 		websocket?.DispatchMessageQueue();
 #endif
+	}
+
+	public async void CallServer()
+	{
+		Debug.Log("Connecting to game server...");
+
+		// Cuando nos queramos conectar varios,
+		// ws://178.33.35.235:3000/gateway?username=XXX
+		websocket = new WebSocket("ws://127.0.0.1:3000/gateway?username=" + Username);
+
+		websocket.OnOpen += OnOpen;
+		websocket.OnMessage += OnMessage;
+
+		await websocket.Connect();
+		//websocket.Send()
+		
 	}
 }

@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     public PlayerStats playerStats;
     public bool isPlaying;
     [HideInInspector] public Rigidbody rb;
+    public string Username;
+    public int GameId;
+    public string userId;
     public static GameManager Instance { get; private set; }
     public static event Action<PlayerStats> OnPlayerStats;
     
@@ -34,5 +37,12 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         PlayerStats.OnPlayerSpawn -= GetPlayerStats;
+    }
+
+    public void SetUsername(string username, string id)
+    {
+        Username = username;
+        userId = id;
+
     }
 }
