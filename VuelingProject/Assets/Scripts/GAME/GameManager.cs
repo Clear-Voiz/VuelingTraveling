@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Plane;
 using UnityEngine;
 
@@ -10,6 +11,9 @@ public class GameManager : MonoBehaviour
     public string Username;
     public int GameId;
     public string userId;
+
+    public Dictionary<int, Player> Players = new Dictionary<int, Player>();
+
     public static GameManager Instance { get; private set; }
     public static event Action<PlayerStats> OnPlayerStats;
     
@@ -44,5 +48,18 @@ public class GameManager : MonoBehaviour
         Username = username;
         userId = id;
 
+    }
+}
+
+public struct Player
+{
+    public int Id { get; set; }
+
+    public string Username { get; set; }
+
+    public Player(int id, string username)
+    {
+        this.Id = id;
+        this.Username = username;
     }
 }

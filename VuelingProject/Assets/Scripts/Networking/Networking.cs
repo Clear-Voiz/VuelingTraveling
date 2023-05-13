@@ -16,6 +16,26 @@ public class Networking : MonoBehaviour
 	{
 		string message = System.Text.Encoding.UTF8.GetString(data);
 		Debug.Log("Message received: " + message);
+
+		JsonMessage msg = JsonUtility.FromJson<JsonMessage>(message);
+
+		switch (msg.type)
+		{
+			case "hello":
+				int gameId = int.Parse(msg.payload["id"]);
+				string list = msg.payload["players"];
+
+				List<Player> players = JsonUtility.FromJson<List<Player>>(list);
+
+				foreach (var p in players)
+				{
+					GameManager.Instance.Players.Add(p.Id, p);
+				}
+
+				Debug.Log("My Id: " + gameId);
+				Debug.Log("Players: " + list);
+				break;
+		}
 	}
 
 	private void OnOpen()
@@ -44,6 +64,22 @@ public class Networking : MonoBehaviour
 
 		await websocket.Connect();
 		//websocket.Send()
-		
+
+		JsonMessage hello = new JsonMessage("hello", 0, new Dictionary<string, string>());
+		await websocket.SendText(JsonUtility.ToJson(hello));
+	}
+
+	struct JsonMessage
+	{
+		public string type { get; set; }
+		public int target { get; set; }
+		public Dictionary<string, string> payload { get; set; }
+
+		public JsonMessage(string type, int target, Dictionary<string, string> payload)
+		{
+			this.type = type;
+			this.target = target;
+			this.payload = payload;
+		}
 	}
 }
