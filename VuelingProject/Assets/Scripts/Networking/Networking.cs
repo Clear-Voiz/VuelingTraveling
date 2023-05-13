@@ -30,6 +30,7 @@ public class Networking : MonoBehaviour
 				foreach (var p in players)
 				{
 					GameManager.Instance.Players.Add(p.Id, p);
+					Debug.Log("Added player Id " + p.Id + " in my game");
 				}
 
 				Debug.Log("My Id: " + gameId);
@@ -38,9 +39,13 @@ public class Networking : MonoBehaviour
 		}
 	}
 
-	private void OnOpen()
+	private async void OnOpen()
 	{
         Debug.Log("Server connected!");
+
+		JsonMessage hello = new JsonMessage("hello", 0, new Dictionary<string, string>());
+		Debug.Log(JsonUtility.ToJson(hello));
+		await websocket.SendText(JsonUtility.ToJson(hello));
 	}
 
 	// Update is called once per frame
@@ -51,7 +56,7 @@ public class Networking : MonoBehaviour
 #endif
 	}
 
-	public async void CallServer()
+	public async void Start()
 	{
 		Debug.Log("Connecting to game server...");
 
@@ -64,16 +69,14 @@ public class Networking : MonoBehaviour
 
 		await websocket.Connect();
 		//websocket.Send()
-
-		JsonMessage hello = new JsonMessage("hello", 0, new Dictionary<string, string>());
-		await websocket.SendText(JsonUtility.ToJson(hello));
 	}
 
+	[System.Serializable]
 	struct JsonMessage
 	{
-		public string type { get; set; }
-		public int target { get; set; }
-		public Dictionary<string, string> payload { get; set; }
+		public string type;
+		public int target;
+		public Dictionary<string, string> payload;
 
 		public JsonMessage(string type, int target, Dictionary<string, string> payload)
 		{
