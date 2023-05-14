@@ -1,17 +1,45 @@
+using GAME;
 using UnityEngine;
 
 namespace Plane
 {
     public class PlayerMovement : MonoBehaviour
     {
-        
-    
-        /*private void FixedUpdate()
+        public GameObject shot;
+        [HideInInspector]public int shoots;
+        public int maxShoots;
+
+        private void OnEnable()
         {
-            PlayerStats playerStats = GameManager.Instance.playerStats;
-            if (GameManager.Instance.rb == null) return;
-            if (playerStats == null) return;
-            GameManager.Instance.rb.velocity = Vector3.right * (-1 * playerStats.baseSpeed - playerStats.speed);
-        }*/
+            ObjectSpawner.onRestarting += Recharge;
+        }
+
+        private void OnDisable()
+        {
+            ObjectSpawner.onRestarting -= Recharge;
+        }
+
+        private void Start()
+        {
+            shoots = maxShoots;
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && shoots >0)
+            {
+                shoots -= 1;
+                Instantiate(shot, transform.position + transform.forward, Quaternion.identity);
+            }
+
+        }
+
+        private void Recharge()
+        {
+            shoots = maxShoots;
+        }
     }
+
+    
+    
 }

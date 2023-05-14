@@ -10,6 +10,21 @@ public class PowerUp : MonoBehaviour
     {
         
     }
+    
+    private void OnEnable()
+    {
+        PlaneCollision.OnGameOver += DestroyOnDemand;
+    }
+
+    private void OnDisable()
+    {
+        PlaneCollision.OnGameOver -= DestroyOnDemand;
+    }
+
+    private void DestroyOnDemand()
+    {
+        Destroy(gameObject);
+    }
 
     protected virtual void DoAction(PlaneController plane)
     {

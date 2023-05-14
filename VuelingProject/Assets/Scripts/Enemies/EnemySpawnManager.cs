@@ -37,7 +37,7 @@ namespace Enemies
             spawnPoints[spawnPoint].Respawn();
             float spawnIncrement = GameManager.Instance.playerStats.speed / GameManager.Instance.playerStats.maxSpeed;
             timeToSpawn = spawnRate - spawnIncrement;
-            spawnPoint = Random.Range(0, spawnPoints.Length - 1);
+            spawnPoint = Random.Range(0, spawnPoints.Length);
         }
     }
 }

@@ -102,7 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9da339bb0e4c3499ef529d256e4a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectTag: Player
   VFX: {fileID: 100000, guid: ec8cde2885710284a9b8c495be620bd9, type: 3}
 --- !u!136 &4159893565967411310
 CapsuleCollider:
@@ -114,10 +113,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.91306084
+  m_Radius: 2.188083
   m_Height: 4.5467052
   m_Direction: 2
-  m_Center: {x: -0.13850528, y: 0, z: -0.7363248}
+  m_Center: {x: -0.10344291, y: 0, z: -0.7363248}
 --- !u!1001 &2094144695267286138
 PrefabInstance:
   m_ObjectHideFlags: 0

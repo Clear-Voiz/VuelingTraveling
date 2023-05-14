@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2259424891570558405}
   - component: {fileID: 6618641009143734065}
   - component: {fileID: 7094778399278095015}
+  - component: {fileID: 1836484315201885675}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -125,6 +126,21 @@ MonoBehaviour:
   inputMovement: {x: 0, y: 0, z: 0}
   joystick: {fileID: 0}
   stats: {fileID: 0}
+--- !u!114 &1836484315201885675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140077614349121298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5a9c8da0ec7a1e4d8509f43d7165874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shot: {fileID: 9161915448254662326, guid: f7d5727b9b2205047a6129a9931eae5f, type: 3}
+  shoots: 0
+  maxShoots: 3
 --- !u!1001 &1140077614561897769
 PrefabInstance:
   m_ObjectHideFlags: 0

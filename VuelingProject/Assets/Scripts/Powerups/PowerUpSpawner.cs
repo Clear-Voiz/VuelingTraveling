@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,9 +14,11 @@ public class PowerUpSpawner : MonoBehaviour
         currentTime = 5;
     }
 
+
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.Instance.isPlaying) return;
         currentTime -= Time.deltaTime;
         if (currentTime <= 0)
         {
@@ -32,4 +33,6 @@ public class PowerUpSpawner : MonoBehaviour
         Instantiate(powerUps[randType], pos, transform.rotation);
         currentTime = Random.Range(5, 10);
     }
+
+   
 }

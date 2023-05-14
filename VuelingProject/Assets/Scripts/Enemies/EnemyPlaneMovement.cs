@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Enemies
@@ -6,7 +5,7 @@ namespace Enemies
     public class EnemyPlaneMovement : MonoBehaviour
     {
         private Rigidbody _rb;
-        private float speed = 6f;
+        private float speed = 3f;
 
         private void Awake()
         {
